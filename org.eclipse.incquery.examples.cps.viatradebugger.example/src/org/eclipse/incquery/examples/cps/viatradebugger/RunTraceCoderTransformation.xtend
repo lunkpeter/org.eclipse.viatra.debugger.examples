@@ -12,22 +12,19 @@ import org.eclipse.incquery.examples.cps.viatradebugger.example.CPSModelInitiali
 class RunTraceCoderTransformation {
 	extension AdaptableExecutorFactory factory = new AdaptableExecutorFactory();
 	extension ViatraTransformation transformation
-	
+
 	@Test def void runViatraTraceCodeTransformation() {
 		val init = new CPSModelInitializer()
 		val cps2dep = init.loadModel("output/example.cyberphysicalsystem")
-		
+
 		transformation = new ViatraTransformation(cps2dep)
-		
+
 		val coder = new TraceCoder(URI.createURI("transformationtrace/trace.transformationtrace"));
-        val manualResolver = new ManualConflictResolverConfiguration
-		
-		 val executor = factory.createAdaptableExecutor()
-                .setQueryEngine(engine)
-                .addConfiguration(manualResolver)
-                .addAdapter(coder)
-                .build() as AdaptableExecutor
-			
+		val manualResolver = new ManualConflictResolverConfiguration
+
+		val executor = factory.createAdaptableExecutor().setQueryEngine(engine).addConfiguration(manualResolver).
+			addAdapter(coder).build() as AdaptableExecutor
+
 		transformation.setExecutor(executor).initialize()
 		coder.setRules(transform.getTransformationRules())
 		transformation.execute

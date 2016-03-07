@@ -2,7 +2,6 @@ package org.eclipse.incquery.examples.cps.viatradebugger.example
 
 import org.eclipse.viatra.examples.cps.traceability.CPSToDeployment
 import org.eclipse.viatra.examples.cps.xform.m2m.incr.viatra.patterns.CpsXformM2M
-import org.eclipse.viatra.examples.cps.xform.m2m.incr.viatra.rules.RuleProvider
 import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine
 import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
 import org.eclipse.viatra.query.runtime.emf.EMFScope
@@ -10,6 +9,7 @@ import org.eclipse.viatra.transformation.evm.api.Executor
 import org.eclipse.viatra.transformation.evm.specific.resolver.FixedPriorityConflictResolver
 import org.eclipse.viatra.transformation.runtime.emf.transformation.eventdriven.EventDrivenTransformation
 import org.eclipse.viatra.transformation.runtime.emf.transformation.eventdriven.ExecutionSchemaBuilder
+import org.eclipse.incquery.examples.cps.viatradebugger.rules.RuleProvider
 
 public class ViatraTransformation{
 	ViatraQueryEngine engine

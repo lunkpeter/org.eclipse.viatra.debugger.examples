@@ -8,6 +8,7 @@ import org.eclipse.viatra.transformation.debug.configuration.TransformationDebug
 import org.eclipse.viatra.transformation.debug.ui.impl.ViewersDebugger
 import org.junit.Test
 import org.eclipse.incquery.examples.cps.viatradebugger.example.CPSModelInitializer
+import org.eclipse.incquery.examples.cps.viatradebugger.patterns.ViewersPatterns
 
 class RunViewersDebuggerTransformation {
 	extension AdaptableExecutorFactory factory = new AdaptableExecutorFactory();
@@ -17,10 +18,11 @@ class RunViewersDebuggerTransformation {
 		val init = new CPSModelInitializer()
 		val cps2dep = init.loadModel("output/example.cyberphysicalsystem")
 		
-		transformation = new ViatraTransformation(cps2dep)
 		
+		transformation = new ViatraTransformation(cps2dep)
+		ViewersPatterns.instance.prepare(engine)
 		val configuration = new TransformationDebuggerConfiguration(
-				new ViewersDebugger(engine, queries.specifications),
+				new ViewersDebugger(engine, ViewersPatterns.instance.specifications),
                 new TransformationBreakpoint(ruleProvider.hostRule.ruleSpecification)
         );
 		
