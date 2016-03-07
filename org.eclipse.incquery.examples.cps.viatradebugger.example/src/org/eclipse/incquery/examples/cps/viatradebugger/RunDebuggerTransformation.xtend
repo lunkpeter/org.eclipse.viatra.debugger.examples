@@ -1,19 +1,19 @@
 package org.eclipse.incquery.examples.cps.viatradebugger
 
-import org.eclipse.incquery.examples.cps.viatradebugger.example.InitializerComponent
 import org.eclipse.incquery.examples.cps.viatradebugger.example.ViatraTransformation
-import org.eclipse.viatra.emf.runtime.adapter.impl.AdaptableExecutor
-import org.eclipse.viatra.emf.runtime.adapter.impl.AdaptableExecutorFactory
-import org.eclipse.viatra.emf.runtime.debug.breakpoints.impl.TransformationBreakpoint
-import org.eclipse.viatra.emf.runtime.debug.configuration.TransformationDebuggerConfiguration
+import org.eclipse.viatra.transformation.debug.adapter.impl.AdaptableExecutor
+import org.eclipse.viatra.transformation.debug.adapter.impl.AdaptableExecutorFactory
+import org.eclipse.viatra.transformation.debug.breakpoints.impl.TransformationBreakpoint
+import org.eclipse.viatra.transformation.debug.configuration.TransformationDebuggerConfiguration
 import org.junit.Test
+import org.eclipse.incquery.examples.cps.viatradebugger.example.CPSModelInitializer
 
 class RunDebuggerTransformation {
 	extension AdaptableExecutorFactory factory = new AdaptableExecutorFactory();
 	extension ViatraTransformation transformation
 	
 	@Test def void runViatraDebugTransformation() {
-		val init = new InitializerComponent()
+		val init = new CPSModelInitializer()
 		val cps2dep = init.loadModel("output/example.cyberphysicalsystem")
 		
 		transformation = new ViatraTransformation(cps2dep)
@@ -23,7 +23,7 @@ class RunDebuggerTransformation {
         );
 		
 		val executor = createAdaptableExecutor()
-			.setIncQueryEngine(engine)
+			.setQueryEngine(engine)
 			.addConfiguration(configuration).build() as AdaptableExecutor
 			
 		transformation.setExecutor(executor).initialize()

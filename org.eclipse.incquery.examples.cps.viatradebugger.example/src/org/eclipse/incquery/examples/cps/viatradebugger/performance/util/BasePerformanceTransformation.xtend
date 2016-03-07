@@ -1,17 +1,17 @@
 package org.eclipse.incquery.examples.cps.viatradebugger.performance.util
 
-import org.eclipse.incquery.examples.cps.traceability.CPSToDeployment
-import org.eclipse.incquery.examples.cps.xform.m2m.incr.viatra.patterns.CpsXformM2M
-import org.eclipse.incquery.examples.cps.xform.m2m.incr.viatra.rules.RuleProvider
-import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine
-import org.eclipse.incquery.runtime.api.IncQueryEngine
-import org.eclipse.incquery.runtime.emf.EMFScope
-import org.eclipse.incquery.runtime.evm.api.ExecutionSchema
-import org.eclipse.incquery.runtime.evm.specific.resolver.FixedPriorityConflictResolver
-import org.eclipse.viatra.emf.runtime.transformation.eventdriven.EventDrivenTransformation
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
+import org.eclipse.viatra.examples.cps.traceability.CPSToDeployment
+import org.eclipse.viatra.transformation.runtime.emf.transformation.eventdriven.EventDrivenTransformation
+import org.eclipse.viatra.examples.cps.xform.m2m.incr.viatra.patterns.CpsXformM2M
+import org.eclipse.viatra.query.runtime.emf.EMFScope
+import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine
+import org.eclipse.viatra.transformation.evm.specific.resolver.FixedPriorityConflictResolver
+import org.eclipse.viatra.transformation.evm.api.ExecutionSchema
+import org.eclipse.viatra.examples.cps.xform.m2m.incr.viatra.rules.RuleProvider
 
 abstract class BasePerformanceTransformation{
-	protected IncQueryEngine engine
+	protected ViatraQueryEngine engine
 	CPSToDeployment cps2dep
 	protected EventDrivenTransformation transform
 	protected extension CpsXformM2M queries = CpsXformM2M.instance
@@ -23,7 +23,7 @@ abstract class BasePerformanceTransformation{
 		this.cps2dep = cps2dep
 		//Create EMF scope and EMF IncQuery engine based on the loaded model
 		val scope = new EMFScope(cps2dep.eResource.getResourceSet())
-		engine = AdvancedIncQueryEngine.createUnmanagedEngine(scope);	
+		engine = AdvancedViatraQueryEngine.createUnmanagedEngine(scope);	
 		prepare(engine)
 		//Create rule provider that defines transformation rules
 		ruleProvider = new RuleProvider(engine, cps2dep)

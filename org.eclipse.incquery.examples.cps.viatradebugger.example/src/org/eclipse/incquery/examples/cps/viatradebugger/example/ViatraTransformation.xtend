@@ -1,18 +1,18 @@
 package org.eclipse.incquery.examples.cps.viatradebugger.example
 
-import org.eclipse.incquery.examples.cps.traceability.CPSToDeployment
-import org.eclipse.incquery.examples.cps.xform.m2m.incr.viatra.patterns.CpsXformM2M
-import org.eclipse.incquery.examples.cps.xform.m2m.incr.viatra.rules.RuleProvider
-import org.eclipse.incquery.runtime.api.AdvancedIncQueryEngine
-import org.eclipse.incquery.runtime.api.IncQueryEngine
-import org.eclipse.incquery.runtime.emf.EMFScope
-import org.eclipse.incquery.runtime.evm.api.Executor
-import org.eclipse.incquery.runtime.evm.specific.resolver.FixedPriorityConflictResolver
-import org.eclipse.viatra.emf.runtime.transformation.eventdriven.EventDrivenTransformation
-import org.eclipse.viatra.emf.runtime.transformation.eventdriven.ExecutionSchemaBuilder
+import org.eclipse.viatra.examples.cps.traceability.CPSToDeployment
+import org.eclipse.viatra.examples.cps.xform.m2m.incr.viatra.patterns.CpsXformM2M
+import org.eclipse.viatra.examples.cps.xform.m2m.incr.viatra.rules.RuleProvider
+import org.eclipse.viatra.query.runtime.api.AdvancedViatraQueryEngine
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine
+import org.eclipse.viatra.query.runtime.emf.EMFScope
+import org.eclipse.viatra.transformation.evm.api.Executor
+import org.eclipse.viatra.transformation.evm.specific.resolver.FixedPriorityConflictResolver
+import org.eclipse.viatra.transformation.runtime.emf.transformation.eventdriven.EventDrivenTransformation
+import org.eclipse.viatra.transformation.runtime.emf.transformation.eventdriven.ExecutionSchemaBuilder
 
 public class ViatraTransformation{
-	IncQueryEngine engine
+	ViatraQueryEngine engine
 	CPSToDeployment cps2dep
 	EventDrivenTransformation transform
 	extension CpsXformM2M queries = CpsXformM2M.instance
@@ -24,7 +24,7 @@ public class ViatraTransformation{
 		//Create EMF scope and EMF IncQuery engine based on the loaded model
 		val scope = new EMFScope(cps2dep.eResource.getResourceSet())
 		
-		engine = AdvancedIncQueryEngine.createUnmanagedEngine(scope);	
+		engine = AdvancedViatraQueryEngine.createUnmanagedEngine(scope);	
 		prepare(engine)
 		
 		//Create rule provider that defines transformation rules

@@ -2,9 +2,10 @@ package org.eclipse.incquery.examples.cps.viatradebugger.performance.util;
 
 import java.util.Set;
 
-import org.eclipse.incquery.runtime.evm.api.Activation;
-import org.eclipse.viatra.emf.runtime.debug.TransformationDebugger.DebuggerActions;
-import org.eclipse.viatra.emf.runtime.debug.controller.IDebugController;
+import org.eclipse.viatra.transformation.debug.TransformationDebugger.DebuggerActions;
+import org.eclipse.viatra.transformation.debug.controller.IDebugController;
+import org.eclipse.viatra.transformation.evm.api.Activation;
+
 
 public class PerformanceTestDebuggerUI implements IDebugController {
 

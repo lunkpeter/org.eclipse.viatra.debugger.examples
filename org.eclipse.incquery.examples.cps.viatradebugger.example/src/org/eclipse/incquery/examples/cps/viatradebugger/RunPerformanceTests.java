@@ -8,8 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.incquery.examples.cps.traceability.CPSToDeployment;
-import org.eclipse.incquery.examples.cps.viatradebugger.example.InitializerComponent;
+import org.eclipse.incquery.examples.cps.viatradebugger.example.CPSModelInitializer;
 import org.eclipse.incquery.examples.cps.viatradebugger.metrics.ModelOnlyMetrics;
 import org.eclipse.incquery.examples.cps.viatradebugger.performance.PerformanceAdaptableExecutorTransformation;
 import org.eclipse.incquery.examples.cps.viatradebugger.performance.PerformanceConditionalDebugTransformation;
@@ -17,9 +16,10 @@ import org.eclipse.incquery.examples.cps.viatradebugger.performance.PerformanceC
 import org.eclipse.incquery.examples.cps.viatradebugger.performance.PerformanceDebugTransformation;
 import org.eclipse.incquery.examples.cps.viatradebugger.performance.PerformanceTraceCodeTransformation;
 import org.eclipse.incquery.examples.cps.viatradebugger.performance.PerformanceTraceExecutorTransformation;
-import org.eclipse.incquery.runtime.api.IncQueryEngine;
-import org.eclipse.incquery.runtime.base.api.BaseIndexOptions;
-import org.eclipse.incquery.runtime.emf.EMFScope;
+import org.eclipse.viatra.examples.cps.traceability.CPSToDeployment;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
+import org.eclipse.viatra.query.runtime.base.api.BaseIndexOptions;
+import org.eclipse.viatra.query.runtime.emf.EMFScope;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -49,10 +49,10 @@ public class RunPerformanceTests {
     @Test
     @Ignore
     public void modelMetrics() {
-        InitializerComponent init = new InitializerComponent();
+        CPSModelInitializer init = new CPSModelInitializer();
         CPSToDeployment cps2dep = init.loadModel("output/output"+size+".cyberphysicalsystem");
         try {
-            IncQueryEngine engine = IncQueryEngine.on(new EMFScope(cps2dep.getCps(), new BaseIndexOptions(true, true)));
+            ViatraQueryEngine engine = ViatraQueryEngine.on(new EMFScope(cps2dep.getCps(), new BaseIndexOptions(true, true)));
             System.out.println("Number of types: "+ModelOnlyMetrics.calcCountTypes(engine));
             System.out.println("Number of elements: "+ModelOnlyMetrics.calcCountNodes(engine));
             System.out.println("Number of ereferences: "+ModelOnlyMetrics.calcCountEdges(engine));
@@ -75,7 +75,7 @@ public class RunPerformanceTests {
         EObject cps = cpsRes.getContents().get(0);
         
         try {
-            IncQueryEngine engine = IncQueryEngine.on(new EMFScope(cps, new BaseIndexOptions(true, true)));
+            ViatraQueryEngine engine = ViatraQueryEngine.on(new EMFScope(cps, new BaseIndexOptions(true, true)));
             System.out.println("Number of types: "+ModelOnlyMetrics.calcCountTypes(engine));
             System.out.println("Number of elements: "+ModelOnlyMetrics.calcCountNodes(engine));
             System.out.println("Number of ereferences: "+ModelOnlyMetrics.calcCountEdges(engine));
@@ -91,7 +91,7 @@ public class RunPerformanceTests {
     @Test
     public void initialize() {
         for(int i =0; i<5; i++){
-            InitializerComponent init = new InitializerComponent();
+            CPSModelInitializer init = new CPSModelInitializer();
             CPSToDeployment cps2dep = init.loadModel("output/output1.cyberphysicalsystem");
             PerformanceControlTransformation transformation = new PerformanceControlTransformation();
             transformation.initialize(cps2dep);
@@ -103,7 +103,7 @@ public class RunPerformanceTests {
     //@Ignore
     public void runControlTransformation() {
         for(int i =0; i<iterations; i++){
-            InitializerComponent init = new InitializerComponent();
+            CPSModelInitializer init = new CPSModelInitializer();
             CPSToDeployment cps2dep = init.loadModel("output/output"+size+".cyberphysicalsystem");
             Long start = System.nanoTime();
             PerformanceControlTransformation transformation = new PerformanceControlTransformation();
@@ -118,7 +118,7 @@ public class RunPerformanceTests {
     @Ignore
     public void runAdapterTransformation() {
         for(int i =0; i<iterations; i++){
-            InitializerComponent init = new InitializerComponent();
+            CPSModelInitializer init = new CPSModelInitializer();
             CPSToDeployment cps2dep = init.loadModel("output/output"+size+".cyberphysicalsystem");
             Long start = System.nanoTime();
             PerformanceAdaptableExecutorTransformation transformation = new PerformanceAdaptableExecutorTransformation();
@@ -135,7 +135,7 @@ public class RunPerformanceTests {
     @Ignore
     public void runDebugTransformation() {
         for(int i =0; i<iterations; i++){
-            InitializerComponent init = new InitializerComponent();
+            CPSModelInitializer init = new CPSModelInitializer();
             CPSToDeployment cps2dep = init.loadModel("output/output"+size+".cyberphysicalsystem");
             Long start = System.nanoTime();
             PerformanceDebugTransformation transformation = new PerformanceDebugTransformation();
@@ -151,7 +151,7 @@ public class RunPerformanceTests {
     @Ignore
     public void runConditionalDebugTransformation() {
         for(int i =0; i<iterations; i++){
-            InitializerComponent init = new InitializerComponent();
+            CPSModelInitializer init = new CPSModelInitializer();
             CPSToDeployment cps2dep = init.loadModel("output/output"+size+".cyberphysicalsystem");
             Long start = System.nanoTime();
             PerformanceConditionalDebugTransformation transformation = new PerformanceConditionalDebugTransformation();
@@ -167,7 +167,7 @@ public class RunPerformanceTests {
     @Ignore
     public void runTracerTransformation() {
         for(int i =0; i<iterations; i++){
-            InitializerComponent init = new InitializerComponent();
+            CPSModelInitializer init = new CPSModelInitializer();
             CPSToDeployment cps2dep = init.loadModel("output/output"+size+".cyberphysicalsystem");
             Long start = System.nanoTime();
             PerformanceTraceCodeTransformation transformation = new PerformanceTraceCodeTransformation();

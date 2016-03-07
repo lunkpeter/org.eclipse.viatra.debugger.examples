@@ -10,36 +10,36 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.incquery.examples.cps.cyberPhysicalSystem.CyberPhysicalSystem;
-import org.eclipse.incquery.examples.cps.deployment.Deployment;
-import org.eclipse.incquery.examples.cps.deployment.DeploymentFactory;
-import org.eclipse.incquery.examples.cps.generator.CPSPlanBuilder;
-import org.eclipse.incquery.examples.cps.generator.dtos.AppClass;
-import org.eclipse.incquery.examples.cps.generator.dtos.BuildableCPSConstraint;
-import org.eclipse.incquery.examples.cps.generator.dtos.CPSFragment;
-import org.eclipse.incquery.examples.cps.generator.dtos.CPSGeneratorInput;
-import org.eclipse.incquery.examples.cps.generator.dtos.GeneratorPlan;
-import org.eclipse.incquery.examples.cps.generator.dtos.HostClass;
-import org.eclipse.incquery.examples.cps.generator.dtos.MinMaxData;
-import org.eclipse.incquery.examples.cps.generator.dtos.Percentage;
-import org.eclipse.incquery.examples.cps.generator.exceptions.ModelGeneratorException;
-import org.eclipse.incquery.examples.cps.generator.interfaces.ICPSConstraints;
-import org.eclipse.incquery.examples.cps.generator.queries.Validation;
-import org.eclipse.incquery.examples.cps.generator.utils.CPSModelBuilderUtil;
-import org.eclipse.incquery.examples.cps.planexecutor.PlanExecutor;
-import org.eclipse.incquery.examples.cps.traceability.CPSToDeployment;
-import org.eclipse.incquery.examples.cps.traceability.TraceabilityFactory;
-import org.eclipse.incquery.runtime.exception.IncQueryException;
+import org.eclipse.viatra.examples.cps.cyberPhysicalSystem.CyberPhysicalSystem;
+import org.eclipse.viatra.examples.cps.deployment.Deployment;
+import org.eclipse.viatra.examples.cps.deployment.DeploymentFactory;
+import org.eclipse.viatra.examples.cps.generator.CPSPlanBuilder;
+import org.eclipse.viatra.examples.cps.generator.dtos.AppClass;
+import org.eclipse.viatra.examples.cps.generator.dtos.BuildableCPSConstraint;
+import org.eclipse.viatra.examples.cps.generator.dtos.CPSFragment;
+import org.eclipse.viatra.examples.cps.generator.dtos.CPSGeneratorInput;
+import org.eclipse.viatra.examples.cps.generator.dtos.GeneratorPlan;
+import org.eclipse.viatra.examples.cps.generator.dtos.HostClass;
+import org.eclipse.viatra.examples.cps.generator.dtos.MinMaxData;
+import org.eclipse.viatra.examples.cps.generator.dtos.Percentage;
+import org.eclipse.viatra.examples.cps.generator.exceptions.ModelGeneratorException;
+import org.eclipse.viatra.examples.cps.generator.interfaces.ICPSConstraints;
+import org.eclipse.viatra.examples.cps.generator.queries.Validation;
+import org.eclipse.viatra.examples.cps.generator.utils.CPSModelBuilderUtil;
+import org.eclipse.viatra.examples.cps.planexecutor.PlanExecutor;
+import org.eclipse.viatra.examples.cps.traceability.CPSToDeployment;
+import org.eclipse.viatra.examples.cps.traceability.TraceabilityFactory;
+import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-public class InitializerComponent {
+public class CPSModelInitializer {
     private DeploymentFactory depFactory = DeploymentFactory.eINSTANCE;
     private TraceabilityFactory traceFactory = TraceabilityFactory.eINSTANCE;
     private int seed = 11111;
 
-    public InitializerComponent(){
+    public CPSModelInitializer(){
         Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
         Map<String, Object> m = reg.getExtensionToFactoryMap();
         m.put("cyberphysicalsystem", new XMIResourceFactoryImpl());
@@ -72,7 +72,7 @@ public class InitializerComponent {
 
             fragment.getEngine().dispose();
 
-        } catch (IncQueryException e) {
+        } catch (ViatraQueryException e) {
             e.printStackTrace();
         }
         // Obtain a new resource set

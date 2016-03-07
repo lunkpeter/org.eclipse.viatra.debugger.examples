@@ -1,21 +1,21 @@
 package org.eclipse.incquery.examples.cps.viatradebugger
 
 import org.eclipse.emf.common.util.URI
-import org.eclipse.incquery.examples.cps.viatradebugger.example.InitializerComponent
 import org.eclipse.incquery.examples.cps.viatradebugger.example.ViatraTransformation
-import org.eclipse.viatra.emf.runtime.adapter.impl.AdaptableExecutor
-import org.eclipse.viatra.emf.runtime.adapter.impl.AdaptableExecutorFactory
-import org.eclipse.viatra.emf.runtime.debug.configuration.ManualConflictResolverConfiguration
-import org.eclipse.viatra.emf.runtime.tracer.tracecoder.TraceCoder
+import org.eclipse.viatra.transformation.debug.adapter.impl.AdaptableExecutor
+import org.eclipse.viatra.transformation.debug.adapter.impl.AdaptableExecutorFactory
+import org.eclipse.viatra.transformation.debug.configuration.ManualConflictResolverConfiguration
+import org.eclipse.viatra.transformation.tracer.tracecoder.TraceCoder
 import org.junit.Test
+import org.eclipse.incquery.examples.cps.viatradebugger.example.CPSModelInitializer
 
 class RunTraceCoderTransformation {
 	extension AdaptableExecutorFactory factory = new AdaptableExecutorFactory();
 	extension ViatraTransformation transformation
 	
 	@Test def void runViatraTraceCodeTransformation() {
-		val init = new InitializerComponent()
-		val cps2dep = init.loadModel("output/output1alt.cyberphysicalsystem")
+		val init = new CPSModelInitializer()
+		val cps2dep = init.loadModel("output/example.cyberphysicalsystem")
 		
 		transformation = new ViatraTransformation(cps2dep)
 		
@@ -23,7 +23,7 @@ class RunTraceCoderTransformation {
         val manualResolver = new ManualConflictResolverConfiguration
 		
 		 val executor = factory.createAdaptableExecutor()
-                .setIncQueryEngine(engine)
+                .setQueryEngine(engine)
                 .addConfiguration(manualResolver)
                 .addAdapter(coder)
                 .build() as AdaptableExecutor

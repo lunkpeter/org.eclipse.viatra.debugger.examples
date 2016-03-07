@@ -21,10 +21,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.incquery.runtime.api.IncQueryEngine;
-import org.eclipse.incquery.runtime.base.api.NavigationHelper;
-import org.eclipse.incquery.runtime.emf.EMFScope;
-import org.eclipse.incquery.runtime.exception.IncQueryException;
+import org.eclipse.viatra.query.runtime.api.ViatraQueryEngine;
+import org.eclipse.viatra.query.runtime.base.api.NavigationHelper;
+import org.eclipse.viatra.query.runtime.emf.EMFScope;
+import org.eclipse.viatra.query.runtime.exception.ViatraQueryException;
 
 /**
  * @author Bergmann Gabor
@@ -36,7 +36,7 @@ public class ModelOnlyMetrics {
     /**
      * #nodes Analyses of RDF Triples in Sample Datasets (COLD 2012)
      */
-    public static int calcCountNodes(IncQueryEngine engine) throws IncQueryException {
+    public static int calcCountNodes(ViatraQueryEngine engine) throws ViatraQueryException {
         final Collection<EObject> eObjects = getAllEObjects(engine);
         return eObjects.size();
     }
@@ -44,7 +44,7 @@ public class ModelOnlyMetrics {
     /**
      * #edges Analyses of RDF Triples in Sample Datasets (COLD 2012)
      */
-    public static int calcCountEdges(IncQueryEngine engine) throws IncQueryException {
+    public static int calcCountEdges(ViatraQueryEngine engine) throws ViatraQueryException {
         final Collection<EObject> eObjects = getAllEObjects(engine);
 
         int countTriples = 0;
@@ -57,7 +57,7 @@ public class ModelOnlyMetrics {
     /**
      * #attribute-assignments Analyses of RDF Triples in Sample Datasets (COLD 2012)
      */
-    public static int calcCountValueAssignments(IncQueryEngine engine) throws IncQueryException {
+    public static int calcCountValueAssignments(ViatraQueryEngine engine) throws ViatraQueryException {
         final Collection<EObject> eObjects = getAllEObjects(engine);
 
         int countTriples = 0;
@@ -67,7 +67,7 @@ public class ModelOnlyMetrics {
         return countTriples;
     }
 
-    private static Collection<EObject> getAllEObjects(IncQueryEngine engine) throws IncQueryException {
+    private static Collection<EObject> getAllEObjects(ViatraQueryEngine engine) throws ViatraQueryException {
         NavigationHelper baseIndex = EMFScope.extractUnderlyingEMFIndex(engine);
         final EClass eObject = EcorePackage.eINSTANCE.getEObject();
         if (!baseIndex.isInWildcardMode())
@@ -80,11 +80,11 @@ public class ModelOnlyMetrics {
     /**
      * #node-types Apples and Oranges
      */
-    public static int calcCountTypes(IncQueryEngine engine) throws IncQueryException {
+    public static int calcCountTypes(ViatraQueryEngine engine) throws ViatraQueryException {
         return getAllUsedEClasses(engine).size();
     }
 
-    private static Set<EClass> getAllUsedEClasses(IncQueryEngine engine) throws IncQueryException {
+    private static Set<EClass> getAllUsedEClasses(ViatraQueryEngine engine) throws ViatraQueryException {
         Set<EClass> allEClasses = new HashSet<EClass>();
         final Collection<EObject> allEObjects = getAllEObjects(engine);
         for (EObject eObject : allEObjects) {
@@ -132,7 +132,7 @@ public class ModelOnlyMetrics {
     /**
      * befok
      */
-    public static int countInDegree(IncQueryEngine engine, EObject value) throws IncQueryException {
+    public static int countInDegree(ViatraQueryEngine engine, EObject value) throws ViatraQueryException {
         NavigationHelper baseIndex = EMFScope.extractUnderlyingEMFIndex(engine);
         if (!baseIndex.isInWildcardMode())
             throw new IllegalStateException("works only in wildcard mode");
@@ -150,7 +150,7 @@ public class ModelOnlyMetrics {
     /**
      * ~In-degree, out-degree distribution Analyses of RDF Triples in Sample Datasets (COLD 2012)
      */
-    public static int calcMaxEReferenceDegree(IncQueryEngine engine, boolean inDegree) throws IncQueryException {
+    public static int calcMaxEReferenceDegree(ViatraQueryEngine engine, boolean inDegree) throws ViatraQueryException {
         int maxDegree = Integer.MIN_VALUE;
         final Collection<EObject> allEObjects = getAllEObjects(engine);
         for (EObject eObject : allEObjects) {
@@ -164,7 +164,7 @@ public class ModelOnlyMetrics {
     /**
      * ~In-degree, out-degree distribution Analyses of RDF Triples in Sample Datasets (COLD 2012)
      */
-    public static double calcAverageEReferenceDegree(IncQueryEngine engine, boolean inDegree) throws IncQueryException {
+    public static double calcAverageEReferenceDegree(ViatraQueryEngine engine, boolean inDegree) throws ViatraQueryException {
         int sumDegree = 0;
         final Collection<EObject> allEObjects = getAllEObjects(engine);
         for (EObject eObject : allEObjects) {

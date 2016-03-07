@@ -1,13 +1,13 @@
 package org.eclipse.incquery.examples.cps.viatradebugger.performance
 
-import org.eclipse.incquery.runtime.evm.api.ExecutionSchema
-import org.eclipse.viatra.emf.runtime.adapter.impl.AdaptableExecutor
-import org.eclipse.viatra.emf.runtime.debug.breakpoints.impl.ConditionalTransformationBreakpoint
-import org.eclipse.viatra.emf.runtime.debug.configuration.TransformationDebuggerConfiguration
-import org.eclipse.viatra.emf.runtime.transformation.eventdriven.ExecutionSchemaBuilder
-import org.eclipse.viatra.emf.runtime.adapter.impl.AdaptableExecutorFactory
-import org.eclipse.incquery.examples.cps.viatradebugger.performance.util.PerformanceTestDebuggerUI
 import org.eclipse.incquery.examples.cps.viatradebugger.performance.util.BasePerformanceTransformation
+import org.eclipse.incquery.examples.cps.viatradebugger.performance.util.PerformanceTestDebuggerUI
+import org.eclipse.viatra.transformation.debug.adapter.impl.AdaptableExecutor
+import org.eclipse.viatra.transformation.debug.adapter.impl.AdaptableExecutorFactory
+import org.eclipse.viatra.transformation.debug.breakpoints.impl.ConditionalTransformationBreakpoint
+import org.eclipse.viatra.transformation.debug.configuration.TransformationDebuggerConfiguration
+import org.eclipse.viatra.transformation.evm.api.ExecutionSchema
+import org.eclipse.viatra.transformation.runtime.emf.transformation.eventdriven.ExecutionSchemaBuilder
 
 class PerformanceConditionalDebugTransformation extends BasePerformanceTransformation{
 	extension AdaptableExecutorFactory factory = new AdaptableExecutorFactory();
@@ -19,7 +19,7 @@ class PerformanceConditionalDebugTransformation extends BasePerformanceTransform
         );
 		
 		val executor = createAdaptableExecutor()
-			.setIncQueryEngine(engine)
+			.setQueryEngine(engine)
 			.addConfiguration(debugAdapterConfiguration).build() as AdaptableExecutor
 		
 		val ExecutionSchemaBuilder builder= new ExecutionSchemaBuilder()

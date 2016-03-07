@@ -2,10 +2,10 @@ package org.eclipse.incquery.examples.cps.viatradebugger.performance
 
 import org.eclipse.emf.common.util.URI
 import org.eclipse.incquery.examples.cps.viatradebugger.performance.util.BasePerformanceTransformation
-import org.eclipse.viatra.emf.runtime.adapter.impl.AdaptableExecutor
-import org.eclipse.viatra.emf.runtime.adapter.impl.AdaptableExecutorFactory
-import org.eclipse.viatra.emf.runtime.tracer.traceexecutor.TraceExecutor
-import org.eclipse.viatra.emf.runtime.transformation.eventdriven.ExecutionSchemaBuilder
+import org.eclipse.viatra.transformation.tracer.traceexecutor.TraceExecutor
+import org.eclipse.viatra.transformation.debug.adapter.impl.AdaptableExecutorFactory
+import org.eclipse.viatra.transformation.debug.adapter.impl.AdaptableExecutor
+import org.eclipse.viatra.transformation.runtime.emf.transformation.eventdriven.ExecutionSchemaBuilder
 
 class PerformanceTraceExecutorTransformation extends BasePerformanceTransformation{
 	TraceExecutor executorAdapter
@@ -15,7 +15,7 @@ class PerformanceTraceExecutorTransformation extends BasePerformanceTransformati
 		executorAdapter = new TraceExecutor(URI.createURI("transformationtrace/trace.transformationtrace"));
         
         val executor = factory.createAdaptableExecutor()
-                .setIncQueryEngine(engine)
+                .setQueryEngine(engine)
                 .addAdapter(executorAdapter)
                 .build() as AdaptableExecutor;
 		
